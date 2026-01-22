@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Products - Gloves Shop</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .page-header {
+            background: linear-gradient(135deg, #2c3e50 0%, #4a90d9 100%);
+            color: white;
+            padding: 50px 20px;
+            text-align: center;
+        }
+        .page-header h1 {
+            font-size: 2.2em;
+            margin-bottom: 20px;
+        }
+        .search-large {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            background: white;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .search-large input {
+            flex: 1;
+            padding: 16px 20px;
+            border: none;
+            font-size: 1em;
+            outline: none;
+        }
+        .search-large button {
+            background: #1a1a1a;
+            color: white;
+            border: none;
+            padding: 16px 30px;
+            cursor: pointer;
+        }
+        .products-page {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        .results-count {
+            color: #666;
+        }
+        .sort-select {
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 0.95em;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-main">
+            <a href="index.html" class="logo">GLOVES<span>SHOP</span></a>
+            <nav class="nav">
+                <a href="index.html">Home</a>
+                <a href="search.html">Products</a>
+                <a href="login.html">Account</a>
+                <a href="cart.html" class="cart-link">Cart (<span class="cart-count">0</span>)</a>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="page-header">
+        <h1>All Products</h1>
+        <div class="search-large">
+            <input type="text" placeholder="Search for gloves...">
+            <button>Search</button>
+        </div>
+    </div>
+    
+    <div class="products-page">
+        <div class="results-header">
+            <span class="results-count">Showing 8 products</span>
+            <select class="sort-select">
+                <option>Sort by: Featured</option>
+                <option>Price: Low to High</option>
+                <option>Price: High to Low</option>
+                <option>Newest First</option>
+            </select>
+        </div>
+        
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-image" style="background: #e8f4f8;">🧤</div>
+                <div class="product-info">
+                    <div class="product-brand">Arctic Pro</div>
+                    <div class="product-name">Thermal Fleece Winter Gloves</div>
+                    <div class="product-rating">★★★★★ <span>(128)</span></div>
+                    <div class="product-price"><span class="current-price">$49.99</span></div>
+                    <button class="add-to-cart-btn">Add to Cart</button>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-image" style="background: #fce8e8;">🥊</div>
+                <div class="product-info">
+                    <div class="product-brand">FightGear</div>
+                    <div class="product-name">Professional Boxing Gloves</div>
+                    <div class="product-rating">★★★★★ <span>(89)</span></div>
+                    <div class="product-price"><span class="current-price">$89.99</span></div>
+                    <button class="add-to-cart-btn">Add to Cart</button>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-image" style="background: #e8f0fc;">🏥</div>
+                <div class="product-info">
+                    <div class="product-brand">MedPro</div>
+                    <div class="product-name">Nitrile Exam Gloves (100 Pack)</div>
+                    <div class="product-rating">★★★★☆ <span>(256)</span></div>
+                    <div class="product-price"><span class="current-price">$24.99</span></div>
+                    <button class="add-to-cart-btn">Add to Cart</button>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-image" style="background: #f0f8e8;">🌿</div>
+                <div class="product-info">
+                    <div class="product-brand">GardenMaster</div>
+                    <div class="product-name">Thorn Resistant Garden Gloves</div>
+                    <div class="product-rating">★★★★★ <span>(73)</span></div>
+                    <div class="product-price"><span class="current-price">$19.99</span></div>
+                    <button class="add-to-cart-btn">Add to Cart</button>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-image" style="background: #f5f0fa;">📱</div>
+                <div class="product-info">
+                    <div class="product-brand">TechTouch</div>
+                    <div class="product-name">Touchscreen Compatible Gloves</div>
+                    <div class="product-rating">★★★★☆ <span>(94)</span></div>
+                    <div class="product-price"><span class="current-price">$29.99</span></div>
+                    <button class="add-to-cart-btn">Add to Cart</button>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-image" style="background: #fcf4e8;">🔧</div>
+                <div class="product-info">
+                    <div class="product-brand">WorkSafe</div>
+                    <div class="product-name">Cut Resistant Work Gloves</div>
+                    <div class="product-rating">★★★★★ <span>(167)</span></div>
+                    <div class="product-price"><span class="current-price">$34.99</span></div>
+                    <button class="add-to-cart-btn">Add to Cart</button>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-image" style="background: #f0e8f8;">🎿</div>
+                <div class="product-info">
+                    <div class="product-brand">AlpineEdge</div>
+                    <div class="product-name">Waterproof Ski Gloves</div>
+                    <div class="product-rating">★★★★★ <span>(52)</span></div>
+                    <div class="product-price"><span class="current-price">$59.99</span></div>
+                    <button class="add-to-cart-btn">Add to Cart</button>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-image" style="background: #e8f8e8;">🏍️</div>
+                <div class="product-info">
+                    <div class="product-brand">RiderPro</div>
+                    <div class="product-name">Premium Leather Motorcycle Gloves</div>
+                    <div class="product-rating">★★★★★ <span>(83)</span></div>
+                    <div class="product-price"><span class="current-price">$69.99</span></div>
+                    <button class="add-to-cart-btn">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <div class="footer-bottom">
+            <p>© 2024 Gloves Shop. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <script src="js/app.js"></script>
+</body>
+</html>

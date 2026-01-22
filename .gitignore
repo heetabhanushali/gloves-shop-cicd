@@ -1,0 +1,75 @@
+# Environment & Secrets
+.env
+.env.local
+.env.*.local
+*.env
+secrets/
+credentials/
+
+# Terraform
+terraform/.terraform/
+terraform/*.tfstate
+terraform/*.tfstate.*
+terraform/*.tfvars
+terraform/.terraform.lock.hcl
+*.tfplan
+
+# Node.js
+node_modules/
+npm-debug.log*
+package-lock.json
+
+# Python
+__pycache__/
+*.py[cod]
+*.so
+venv/
+.venv/
+
+# Java
+target/
+*.jar
+*.war
+*.class
+
+# Go
+bin/
+pkg/
+*.exe
+
+# PHP
+vendor/
+composer.lock
+
+# IDE & Editors
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Build Outputs
+dist/
+build/
+out/
+
+# Docker
+*.tar
+
+# Kubernetes Secrets
+*-secret.yaml
+kubeconfig
+.kube/
+
+# Misc
+*.bak
+*.tmp
+.cache/
+Gopkg.lock
+*-private.*

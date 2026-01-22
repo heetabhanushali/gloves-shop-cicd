@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - Gloves Shop</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .page-header {
+            background: #1a1a1a;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        .page-header h1 {
+            font-size: 2em;
+            font-weight: 600;
+        }
+        .cart-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 30px;
+        }
+        .cart-items {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            border: 1px solid #eee;
+        }
+        .cart-item {
+            display: grid;
+            grid-template-columns: 80px 1fr auto auto;
+            gap: 20px;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+        .item-image {
+            width: 80px;
+            height: 80px;
+            background: #f5f5f5;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+        }
+        .item-details h3 {
+            font-size: 1em;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        .item-details p {
+            color: #888;
+            font-size: 0.9em;
+        }
+        .item-quantity {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .qty-btn {
+            width: 32px;
+            height: 32px;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1.1em;
+        }
+        .qty-btn:hover {
+            background: #f5f5f5;
+        }
+        .item-price {
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+        .cart-summary {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            border: 1px solid #eee;
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+        .summary-title {
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 0.95em;
+        }
+        .summary-row.total {
+            font-size: 1.2em;
+            font-weight: 700;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #1a1a1a;
+        }
+        .checkout-btn {
+            width: 100%;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 4px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .checkout-btn:hover {
+            background: #3a7fc8;
+        }
+        .continue-link {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            color: #4a90d9;
+        }
+        @media (max-width: 768px) {
+            .cart-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-main">
+            <a href="index.html" class="logo">GLOVES<span>SHOP</span></a>
+            <nav class="nav">
+                <a href="index.html">Home</a>
+                <a href="search.html">Products</a>
+                <a href="login.html">Account</a>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="page-header">
+        <h1>Shopping Cart</h1>
+    </div>
+    
+    <div class="cart-container">
+        <div class="cart-items">
+            <div class="cart-item">
+                <div class="item-image">🧤</div>
+                <div class="item-details">
+                    <h3>Thermal Fleece Winter Gloves</h3>
+                    <p>Arctic Pro • Size: Medium</p>
+                </div>
+                <div class="item-quantity">
+                    <button class="qty-btn">-</button>
+                    <span>1</span>
+                    <button class="qty-btn">+</button>
+                </div>
+                <div class="item-price">$49.99</div>
+            </div>
+            
+            <div class="cart-item">
+                <div class="item-image">🥊</div>
+                <div class="item-details">
+                    <h3>Professional Boxing Gloves 16oz</h3>
+                    <p>FightGear • Color: Red</p>
+                </div>
+                <div class="item-quantity">
+                    <button class="qty-btn">-</button>
+                    <span>1</span>
+                    <button class="qty-btn">+</button>
+                </div>
+                <div class="item-price">$89.99</div>
+            </div>
+            
+            <div class="cart-item">
+                <div class="item-image">🏍️</div>
+                <div class="item-details">
+                    <h3>Premium Leather Motorcycle Gloves</h3>
+                    <p>RiderPro • Size: Large</p>
+                </div>
+                <div class="item-quantity">
+                    <button class="qty-btn">-</button>
+                    <span>1</span>
+                    <button class="qty-btn">+</button>
+                </div>
+                <div class="item-price">$69.99</div>
+            </div>
+        </div>
+        
+        <div class="cart-summary">
+            <div class="summary-title">Order Summary</div>
+            <div class="summary-row">
+                <span>Subtotal (3 items)</span>
+                <span>$209.97</span>
+            </div>
+            <div class="summary-row">
+                <span>Shipping</span>
+                <span>Free</span>
+            </div>
+            <div class="summary-row">
+                <span>Tax</span>
+                <span>$16.80</span>
+            </div>
+            <div class="summary-row total">
+                <span>Total</span>
+                <span>$226.77</span>
+            </div>
+            <button class="checkout-btn">Proceed to Checkout</button>
+            <a href="index.html" class="continue-link">← Continue Shopping</a>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <div class="footer-bottom">
+            <p>© 2024 Gloves Shop. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

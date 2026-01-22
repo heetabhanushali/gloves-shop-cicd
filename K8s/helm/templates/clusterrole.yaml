@@ -1,0 +1,15 @@
+{{ if .Values.psp.enabled }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: gloves-shop
+rules:
+- apiGroups:
+  - policy
+  resourceNames:
+  - gloves-shop
+  resources:
+  - podsecuritypolicies
+  verbs:
+  - use
+{{ end }}

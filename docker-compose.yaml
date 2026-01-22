@@ -1,0 +1,160 @@
+networks:
+  gloves-shop:
+    driver: bridge
+
+services:
+  # ===========================================
+  # DATABASES
+  # ===========================================
+  mongodb:
+    image: mongo:5.0
+    container_name: gloves-shop-mongodb
+    restart: unless-stopped
+    networks:
+      - gloves-shop
+
+  redis:
+    image: redis:6.2-alpine
+    container_name: gloves-shop-redis
+    restart: unless-stopped
+    networks:
+      - gloves-shop
+
+  rabbitmq:
+    image: rabbitmq:3.8-management-alpine
+    container_name: gloves-shop-rabbitmq
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    restart: unless-stopped
+    networks:
+      - gloves-shop
+
+  mysql:
+    build:
+      context: ./mysql
+    image: heeta/gloves-shop-mysql:1.0.0
+    platform: linux/amd64
+    container_name: gloves-shop-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+    restart: unless-stopped
+    networks:
+      - gloves-shop
+
+  # ===========================================
+  # MICROSERVICES
+  # ===========================================
+  catalogue:
+    build:
+      context: ./catalogue
+    image: heeta/gloves-shop-catalogue:1.0.0
+    platform: linux/amd64
+    container_name: gloves-shop-catalogue
+    depends_on:
+      - mongodb
+    restart: unless-stopped
+    networks:
+      - gloves-shop
+
+  user:
+    build:
+      context: ./user
+    image: heeta/gloves-shop-user:1.0.0
+    platform: linux/amd64
+    container_name: gloves-shop-user
+    depends_on:
+      - mongodb
+      - redis
+    restart: unless-stopped
+    networks:
+      - gloves-shop
+
+  cart:
+    build:
+      context: ./cart
+    image: heeta/gloves-shop-cart:1.0.0
+    platform: linux/amd64
+    container_name: gloves-shop-cart
+    depends_on:
+      - redis
+    restart: unless-stopped
+    networks:
+      - gloves-shop
+
+  shipping:
+    build:
+      context: ./shipping
+    image: heeta/gloves-shop-shipping:1.0.0
+    platform: linux/amd64
+    container_name: gloves-shop-shipping
+    depends_on:
+      - mysql
+    restart: unless-stopped
+    networks:
+      - gloves-shop
+
+  ratings:
+    build:
+      context: ./ratings
+    image: heeta/gloves-shop-ratings:1.0.0
+    platform: linux/amd64
+    container_name: gloves-shop-ratings
+    depends_on:
+      - mysql
+    restart: unless-stopped
+    networks:
+      - gloves-shop
+
+  payment:
+    build:
+      context: ./payment
+    image: heeta/gloves-shop-payment:1.0.0
+    platform: linux/amd64
+    container_name: gloves-shop-payment
+    depends_on:
+      - rabbitmq
+    restart: unless-stopped
+    networks:
+      - gloves-shop
+
+  dispatch:
+    build:
+      context: ./dispatch
+    image: heeta/gloves-shop-dispatch:1.0.0
+    platform: linux/amd64
+    container_name: gloves-shop-dispatch
+    depends_on:
+      - rabbitmq
+    restart: unless-stopped
+    networks:
+      - gloves-shop
+
+  # ===========================================
+  # FRONTEND
+  # ===========================================
+  web:
+    build:
+      context: ./web
+    image: heeta/gloves-shop-web:1.0.0
+    platform: linux/amd64
+    container_name: gloves-shop-web
+    ports:
+      - "8080:8080"
+    depends_on:
+      - catalogue
+      - user
+      - cart
+      - shipping
+      - payment
+      - ratings
+    environment:
+      - CATALOGUE_HOST=catalogue
+      - USER_HOST=user
+      - CART_HOST=cart
+      - SHIPPING_HOST=shipping
+      - PAYMENT_HOST=payment
+      - RATINGS_HOST=ratings
+    restart: unless-stopped
+    networks:
+      - gloves-shop

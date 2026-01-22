@@ -1,0 +1,30 @@
+version: '3'
+services:
+  rabbitmq:
+    image: rabbitmq:3.7-management-alpine
+    ports:
+      - "5672"
+      - "15672:15672"
+    networks:
+      - gloves-shop
+  payment:
+    build:
+      context: ../payment
+    image: steveww/rs-payment
+    depends_on:
+      - rabbitmq
+    ports:
+      - "8080:8080"
+    networks:
+      - gloves-shop
+  dispatch:
+    build:
+      context: .
+    image: steveww/rs-dispatch
+    depends_on:
+      - rabbitmq
+    networks:
+      - gloves-shop
+
+networks:
+  gloves-shop:
