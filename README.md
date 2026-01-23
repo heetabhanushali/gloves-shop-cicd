@@ -1,4 +1,4 @@
-# 🧤 Gloves Shop
+# Gloves Shop
 
 ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
 ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
@@ -7,11 +7,11 @@
 
 A fully functional e-commerce microservices application demonstrating a complete **DevOps workflow**.
 
-## 📋 Overview
+## Overview
 
 Gloves Shop is a polyglot microservices application designed to showcase modern software development practices. It consists of 8 independent services, each built with a different language to simulate a diverse enterprise environment. The project highlights containerization with Docker, orchestration, and infrastructure as code.
 
-### 🚀 Key Features
+### Key Features
 *   **Microservices Architecture:** 8 services running independently.
 *   **Polyglot Stack:** Node.js, Java, Python, Go, PHP.
 *   **Data Persistence:** MongoDB, MySQL, Redis, RabbitMQ.
@@ -19,7 +19,7 @@ Gloves Shop is a polyglot microservices application designed to showcase modern 
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -51,7 +51,7 @@ Gloves Shop is a polyglot microservices application designed to showcase modern 
 
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 
 | Service | Language | Database | Purpose |
 |---------|----------|----------|---------|
@@ -66,7 +66,7 @@ Gloves Shop is a polyglot microservices application designed to showcase modern 
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 gloves-shop-cicd/
@@ -91,7 +91,7 @@ gloves-shop-cicd/
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 *   Docker
@@ -128,7 +128,7 @@ You should see 12 containers running (8 services + 4 databases/infrastructure).
 
 ---
 
-## ⚙️ DevOps & CI/CD
+## DevOps & CI/CD
 
 This project is configured with a full CI/CD pipeline.
 
@@ -139,7 +139,7 @@ This project is configured with a full CI/CD pipeline.
 
 ---
 
-## 📸 Project Screenshots
+## Project Screenshots
 
 ### 1. Running Containers
 All 12 services running successfully in Docker.
@@ -155,7 +155,7 @@ Custom images published to DockerHub.
 
 ---
 
-## 🛠 Challenges & Solutions
+## Challenges & Solutions
 
 *   **Multi-Architecture Support:** Updated Dockerfiles to ensure compatibility with Mac M2 (ARM64) by explicitly setting `platform: linux/amd64` where necessary.
 *   **Dependency Management:** Successfully cleaned up legacy monitoring dependencies (Instana SDK) across 5 different programming languages without breaking service functionality.
@@ -163,7 +163,7 @@ Custom images published to DockerHub.
 
 ---
 
-## 🧪 Future Improvements
+## Future Improvements
 
 *   [ ] Kubernetes Deployment on AWS EKS
 *   [ ] Implementing Prometheus & Grafana for monitoring
@@ -172,7 +172,7 @@ Custom images published to DockerHub.
 
 ---
 
-## 👨‍💻 Author
+## Author
 
 **Heeta Bhanushali**
 *   [GitHub](https://github.com/heetabhanushali)
