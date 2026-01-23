@@ -149,6 +149,10 @@ All 12 services running successfully in Docker.
 The Gloves Shop frontend serving requests.
 ![Website UI](./images/website-ui.png)
 
+### 3. Artifact Registry
+Custom images published to DockerHub.
+![DockerHub Registry](./images/dockerhub-images.png)
+
 ---
 
 ## 🛠 Challenges & Solutions
