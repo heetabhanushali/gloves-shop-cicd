@@ -158,3 +158,42 @@ services:
     restart: unless-stopped
     networks:
       - gloves-shop
+  # ===========================================
+  # MONITORING STACK
+  # ===========================================
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:latest
+    container_name: gloves-shop-cadvisor
+    ports:
+      - "8081:8080"
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    networks:
+      - gloves-shop
+
+  prometheus:
+    image: prom/prometheus
+    container_name: gloves-shop-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - gloves-shop
+
+  grafana:
+    image: grafana/grafana
+    container_name: gloves-shop-grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+    depends_on:
+      - prometheus
+    networks:
+      - gloves-shop
+

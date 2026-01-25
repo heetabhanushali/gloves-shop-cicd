@@ -16,37 +16,27 @@ Gloves Shop is a polyglot microservices application designed to showcase modern 
 *   **Polyglot Stack:** Node.js, Java, Python, Go, PHP.
 *   **Data Persistence:** MongoDB, MySQL, Redis, RabbitMQ.
 *   **DevOps Ready:** CI/CD pipelines, Terraform configurations, and Kubernetes manifests included.
+*   **System Monitoring:** Implemented observability stack using Prometheus and Grafana for real-time tracking of CPU, memory, and network metrics across all 12 services.
 
 ---
 
 ## Architecture
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│                       USER                              │
-│                   (Web Browser)                         │
-└────────────────────┬────────────────────────────────────┘
-                     │
-                     ▼
-┌─────────────────────────────────────────────────────────┐
-│                    WEB (Nginx)                          │
-│                   (Port: 8080)                          │
-└────────────────────┬────────────────────────────────────┘
-                     │
-      ┌──────────────┼──────────────┬──────────────┐
-      ▼              ▼              ▼              ▼
-┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────┐
-│ Catalogue│   │   Cart   │   │   User   │   │ Shipping │
-│ (Node.js)│   │ (Node.js)│   │ (Node.js)│   │  (Java)  │
-│ + Mongo  │   │ + Redis  │   │ + Mongo  │   │ + MySQL  │
-└──────────┘   └──────────┘   └──────────┘   └──────────┘
-                     │              │              │
-                     └──────────────┼──────────────┘
-                                    ▼
-                         ┌──────────────────┐
-                         │   Message Queue  │
-                         │    (RabbitMQ)    │
-                         └──────────────────┘
+graph TD
+    User[User] -->|HTTP| Web[Nginx Web Server]
+    Web -->|API| Catalogue[Catalogue Service<br/>Node.js + MongoDB]
+    Web -->|API| Cart[Cart Service<br/>Node.js + Redis]
+    subgraph "Monitoring Layer"
+        Prometheus[Prometheus]
+        Grafana[Grafana]
+        cAdvisor[cAdvisor]
+    end
+    Web -->|Metrics| cAdvisor
+    Cart -->|Metrics| cAdvisor
+    Catalogue -->|Metrics| cAdvisor
+    cAdvisor -->|Scrapes| Prometheus
+    Prometheus -->|Data| Grafana
 ```
 
 ---
@@ -153,12 +143,15 @@ The Gloves Shop frontend serving requests.
 Custom images published to DockerHub.
 ![DockerHub Registry](./images/dockerhub-images.png)
 
+### System Monitoring
+Real-time metrics for CPU, memory, and network traffic using Prometheus and Grafana.
+![Monitoring Dashboard](./images/monitoring-dashboard.png)
+
 ---
 
 ## Future Improvements
 
 *   [ ] Kubernetes Deployment on AWS EKS
-*   [ ] Implementing Prometheus & Grafana for monitoring
 *   [ ] Adding comprehensive integration tests
 *   [ ] Implementing Service Mesh (Istio)
 
