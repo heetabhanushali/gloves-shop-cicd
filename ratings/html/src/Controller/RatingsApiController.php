@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Instana\RobotShop\Ratings\Controller;
+namespace GlovesShop\Ratings\Controller;
 
-use Instana\RobotShop\Ratings\Service\CatalogueService;
-use Instana\RobotShop\Ratings\Service\RatingsService;
+use GlovesShop\Ratings\Service\CatalogueService;
+use GlovesShop\Ratings\Service\RatingsService;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 use Symfony\Component\HttpFoundation\JsonResponse;

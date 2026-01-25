@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Instana\RobotShop\Ratings\Service;
+namespace GlovesShop\Ratings\Service;
 
 use Exception;
 use Psr\Log\LoggerAwareInterface;

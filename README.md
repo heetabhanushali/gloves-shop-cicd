@@ -155,14 +155,6 @@ Custom images published to DockerHub.
 
 ---
 
-## Challenges & Solutions
-
-*   **Multi-Architecture Support:** Updated Dockerfiles to ensure compatibility with Mac M2 (ARM64) by explicitly setting `platform: linux/amd64` where necessary.
-*   **Dependency Management:** Successfully cleaned up legacy monitoring dependencies (Instana SDK) across 5 different programming languages without breaking service functionality.
-*   **Orchestration:** Managed complex service dependencies (RabbitMQ, MySQL, Redis) ensuring healthy startup order.
-
----
-
 ## Future Improvements
 
 *   [ ] Kubernetes Deployment on AWS EKS

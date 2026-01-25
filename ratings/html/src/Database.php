@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Instana\RobotShop\Ratings;
+namespace GlovesShop\Ratings;
 
 use PDO;
 use PDOException;

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 require __DIR__.'/vendor/autoload.php';
 
-use Instana\RobotShop\Ratings\Kernel;
+use GlovesShop\Ratings\Kernel;
 use Symfony\Component\HttpFoundation\Request;
 
 $env = getenv('APP_ENV') ?: 'dev';

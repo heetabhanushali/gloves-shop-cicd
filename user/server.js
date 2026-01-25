@@ -41,7 +41,7 @@ app.use((req, res, next) => {
         "us-east1",
         "us-west1"
     ];
-    let span = instana.currentSpan();
+    // // instana removed // removed
     span.annotate('custom.sdk.tags.datacenter', dcs[Math.floor(Math.random() * dcs.length)]);
 
     next();

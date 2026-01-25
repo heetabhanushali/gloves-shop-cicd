@@ -2,15 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Instana\RobotShop\Ratings;
+namespace GlovesShop\Ratings;
 
-use Instana\RobotShop\Ratings\Controller\HealthController;
-use Instana\RobotShop\Ratings\Controller\RatingsApiController;
-use Instana\RobotShop\Ratings\EventListener\InstanaDataCenterListener;
-use Instana\RobotShop\Ratings\Integration\InstanaHeadersLoggingProcessor;
-use Instana\RobotShop\Ratings\Service\CatalogueService;
-use Instana\RobotShop\Ratings\Service\HealthCheckService;
-use Instana\RobotShop\Ratings\Service\RatingsService;
+use GlovesShop\Ratings\Controller\HealthController;
+use GlovesShop\Ratings\Controller\RatingsApiController;
+use GlovesShop\Ratings\Service\CatalogueService;
+use GlovesShop\Ratings\Service\HealthCheckService;
+use GlovesShop\Ratings\Service\RatingsService;
 use Monolog\Formatter\LineFormatter;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
@@ -79,11 +77,9 @@ class Kernel extends BaseKernel implements EventSubscriberInterface
         $c->setParameter('pdo_password', 'iloveit');
         $c->setParameter('logger.name', 'RatingsAPI');
 
-        $c->register(InstanaHeadersLoggingProcessor::class)
             ->addTag('kernel.event_subscriber')
             ->addTag('monolog.processor');
 
-        $c->register('monolog.formatter.instana_headers', LineFormatter::class)
             ->addArgument('[%%datetime%%] [%%extra.token%%] %%channel%%.%%level_name%%: %%message%% %%context%% %%extra%%\n');
 
         $c->register(Database::class)
@@ -122,7 +118,6 @@ class Kernel extends BaseKernel implements EventSubscriberInterface
             ->addTag('controller.service_arguments')
             ->setAutowired(true);
 
-        $c->register(InstanaDataCenterListener::class)
             ->addTag('kernel.event_listener', [
                 'event' => 'kernel.request'
             ])
