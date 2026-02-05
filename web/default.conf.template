@@ -1,5 +1,3 @@
-opentracing_propagate_context;
-
 server {
     listen       8080;
     server_name  localhost;

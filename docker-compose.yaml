@@ -7,7 +7,9 @@ services:
   # DATABASES
   # ===========================================
   mongodb:
-    image: mongo:5.0
+    build:
+      context: ./mongo
+    image: heeta/gloves-shop-mongodb:1.0.0
     container_name: gloves-shop-mongodb
     restart: unless-stopped
     networks:
