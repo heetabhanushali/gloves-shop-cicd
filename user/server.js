@@ -1,4 +1,3 @@
-
 const mongoClient = require('mongodb').MongoClient;
 const mongoObjectID = require('mongodb').ObjectID;
 const redis = require('redis');
@@ -234,7 +233,8 @@ app.get('/history/:id', (req, res) => {
 
 // connect to Redis
 var redisClient = redis.createClient({
-    host: process.env.REDIS_HOST || 'redis'
+    host: process.env.REDIS_HOST || 'redis',
+    password: process.env.REDIS_PASSWORD
 });
 
 redisClient.on('error', (e) => {

@@ -52,9 +52,9 @@ app.get('/health', (req, res) => {
 });
 
 // Prometheus
-app.get('/metrics', (req, res) => {
+app.get('/metrics', async (req, res) => {
     res.header('Content-Type', 'text/plain');
-    res.send(register.metrics());
+    res.send(await register.metrics());
 });
 
 
@@ -366,7 +366,8 @@ function saveCart(id, cart) {
 
 // connect to Redis
 var redisClient = redis.createClient({
-    host: redisHost
+    host: redisHost,
+    password: process.env.REDIS_PASSWORD
 });
 
 redisClient.on('error', (e) => {

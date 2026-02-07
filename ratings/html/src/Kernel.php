@@ -9,7 +9,6 @@ use GlovesShop\Ratings\Controller\RatingsApiController;
 use GlovesShop\Ratings\Service\CatalogueService;
 use GlovesShop\Ratings\Service\HealthCheckService;
 use GlovesShop\Ratings\Service\RatingsService;
-use Monolog\Formatter\LineFormatter;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Bundle\MonologBundle\MonologBundle;
@@ -71,16 +70,18 @@ class Kernel extends BaseKernel implements EventSubscriberInterface
             ],
         ]);
 
+        // Database configuration from environment variables
+        $dbHost = getenv('MYSQL_HOST') ?: 'mysql';
+        $dbName = getenv('MYSQL_DATABASE') ?: 'gloves_shop';
+        $dbUser = getenv('MYSQL_USER') ?: 'gloves_user';
+        $dbPassword = getenv('MYSQL_PASSWORD') ?: 'gloves_password';
+        $pdoDsn = getenv('PDO_URL') ?: "mysql:host={$dbHost};dbname={$dbName};charset=utf8mb4";
+
         $c->setParameter('catalogueUrl', getenv('CATALOGUE_URL') ?: 'http://catalogue:8080');
-        $c->setParameter('pdo_dsn', getenv('PDO_URL') ?: 'mysql:host=mysql;dbname=ratings;charset=utf8mb4');
-        $c->setParameter('pdo_user', 'ratings');
-        $c->setParameter('pdo_password', 'iloveit');
+        $c->setParameter('pdo_dsn', $pdoDsn);
+        $c->setParameter('pdo_user', $dbUser);
+        $c->setParameter('pdo_password', $dbPassword);
         $c->setParameter('logger.name', 'RatingsAPI');
-
-            ->addTag('kernel.event_subscriber')
-            ->addTag('monolog.processor');
-
-            ->addArgument('[%%datetime%%] [%%extra.token%%] %%channel%%.%%level_name%%: %%message%% %%context%% %%extra%%\n');
 
         $c->register(Database::class)
             ->addArgument($c->getParameter('pdo_dsn'))
@@ -116,11 +117,6 @@ class Kernel extends BaseKernel implements EventSubscriberInterface
         $c->register(RatingsApiController::class)
             ->addMethodCall('setLogger', [new Reference('logger')])
             ->addTag('controller.service_arguments')
-            ->setAutowired(true);
-
-            ->addTag('kernel.event_listener', [
-                'event' => 'kernel.request'
-            ])
             ->setAutowired(true);
     }
 

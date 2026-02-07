@@ -1,20 +1,34 @@
 import json
 import pika
 import os
+from urllib.parse import urlparse
 
 class Publisher:
-    HOST = os.getenv('AMQP_HOST', 'rabbitmq')
     VIRTUAL_HOST = '/'
-    EXCHANGE='gloves-shop'
-    TYPE='direct'
+    EXCHANGE = 'gloves-shop'
+    TYPE = 'direct'
     ROUTING_KEY = 'orders'
 
     def __init__(self, logger):
         self._logger = logger
+        
+        # Parse AMQP_HOST environment variable
+        amqp_url = os.getenv('AMQP_HOST', 'amqp://guest:guest@rabbitmq:5672/')
+        parsed = urlparse(amqp_url)
+        
+        host = parsed.hostname or 'rabbitmq'
+        port = parsed.port or 5672
+        username = parsed.username or 'guest'
+        password = parsed.password or 'guest'
+        
+        self._logger.info(f'RabbitMQ connecting to {host}:{port}')
+        
         self._params = pika.connection.ConnectionParameters(
-            host=self.HOST,
+            host=host,
+            port=port,
             virtual_host=self.VIRTUAL_HOST,
-            credentials=pika.credentials.PlainCredentials('guest', 'guest'))
+            credentials=pika.credentials.PlainCredentials(username, password)
+        )
         self._conn = None
         self._channel = None
 
@@ -26,13 +40,14 @@ class Publisher:
             self._logger.info('connected to broker')
 
     def _publish(self, msg, headers):
-        self._channel.basic_publish(exchange=self.EXCHANGE,
-                                    routing_key=self.ROUTING_KEY,
-                                    properties=pika.BasicProperties(headers=headers),
-                                    body=json.dumps(msg).encode())
+        self._channel.basic_publish(
+            exchange=self.EXCHANGE,
+            routing_key=self.ROUTING_KEY,
+            properties=pika.BasicProperties(headers=headers),
+            body=json.dumps(msg).encode()
+        )
         self._logger.info('message sent')
 
-    #Publish msg, reconnecting if necessary.
     def publish(self, msg, headers):
         if self._channel is None or self._channel.is_closed or self._conn is None or self._conn.is_closed:
             self._connect()
@@ -47,4 +62,3 @@ class Publisher:
         if self._conn and self._conn.is_open:
             self._logger.info('closing queue connection')
             self._conn.close()
-

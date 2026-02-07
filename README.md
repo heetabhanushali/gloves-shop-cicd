@@ -96,18 +96,30 @@ gloves-shop-cicd/
     cd gloves-shop-cicd
     ```
 
-2.  **Build the images**
+2. **Configure Environment Variables**
+   ```bash
+    # Copy example env file
+    cp .env.example .env
+
+    # Edit .env and set secure passwords
+    nano .env
+    ``` 
+
+3.  **Build the images**
     ```bash
     docker-compose build
     ```
 
-3.  **Run the application**
+4.  **Run the application**
     ```bash
     docker-compose up -d
     ```
 
-4.  **Access the application**
-    *   Open your browser and navigate to: `http://localhost:8080`
+5.  **Access the application**
+    *   Frontend: `http://localhost:8080`
+    *   Grafana: `http://localhost:3000` (admin / your_password)
+    *   Prometheus: `http://localhost:9090`
+    *   RabbitMQ: `http://localhost:15672` (your_user / your_password)
 
 ### Verification
 To ensure all services are running correctly:
